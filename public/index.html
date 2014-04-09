@@ -1,0 +1,18 @@
+<!doctype>
+<html ng-app="app">
+<head>
+    <base href="/">
+    <title>Puull.it</title>
+</head>
+<body>
+
+    <div ng-controller="ListCtrl">
+        <img ng-repeat="p in puushes" src="/dl/{{p.img}}" alt="">
+    </div>
+
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.15/angular.min.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
