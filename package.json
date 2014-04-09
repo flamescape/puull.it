@@ -1,0 +1,24 @@
+{
+  "name": "puull.it",
+  "version": "0.0.0",
+  "description": "puull.it\r ========",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flamescape/puull.it.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/flamescape/puull.it/issues"
+  },
+  "homepage": "https://github.com/flamescape/puull.it",
+  "dependencies": {
+    "bluebird": "~1.2.1",
+    "request": "~2.34.0",
+    "express": "~3.5.1"
+  }
+}
