@@ -5,9 +5,11 @@ var express = require('express')
 
   
 app.get('/dl/:id', function(req, res, next){
+    console.log('req', req.ip, req.params.id);
     request.get('http://puu.sh/'+req.params.id).pipe(res);
 });
 
+app.use('/js/vendor', express.static('node_modules'));
 app.use(express.static('public'));
 
 app.listen(80);

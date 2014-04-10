@@ -19,6 +19,8 @@
   "dependencies": {
     "bluebird": "~1.2.1",
     "request": "~2.34.0",
-    "express": "~3.5.1"
+    "express": "~3.5.1",
+    "bases": "~0.2.0",
+    "browserify": "~3.39.0"
   }
 }

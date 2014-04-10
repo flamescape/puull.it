@@ -3,15 +3,39 @@
 <head>
     <base href="/">
     <title>Puull.it</title>
+    
+    <style>
+        .puushes {
+            display: flex;
+            flex-flow: wrap;
+            justify-content: space-between;
+        }
+        .puushes diagram {
+            height: 200px;
+            border: 1px solid black;
+            min-width: 100px;
+            max-width: 250px;
+            overflow: hidden;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .puushes img {
+            height: 200px;
+        }
+    </style>
+    
 </head>
 <body>
 
-    <div ng-controller="ListCtrl">
-        <img ng-repeat="p in puushes" src="/dl/{{p.img}}" alt="">
+    <div ng-controller="ListCtrl" class="puushes">
+        <diagram ng-repeat="p in puushes">
+            <img ng-src="/dl/{{p.img}}" alt="">
+        </diagram>
     </div>
 
     
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.15/angular.min.js"></script>
+    <script src="js/vendor/bases/bases.js"></script>
+    <script src="js/vendor/angular.min.js"></script>
     <script src="js/app.js"></script>
 
 </body>
