@@ -1,0 +1,25 @@
+POST /api/up HTTP/1.1
+Accept: */*
+Content-Length: 1460
+Content-Type: multipart/form-data; boundary=---------------------------040B071A2F11
+Accept-Encoding: gzip, deflate
+Host: puush.me
+User-Agent: Mozilla/4.0 (compatible; Clever Internet Suite 6.1)
+Cache-Control: no-cache
+Connection: Keep-Alive
+
+-----------------------------040B071A2F11
+Content-Disposition: form-data; name="k"
+
+AAF303829FFC9689A770B5B44EDF7487
+-----------------------------040B071A2F11
+Content-Disposition: form-data; name="c"
+
+4ffee5319e93600a9a8d17d0c5991a26
+-----------------------------040B071A2F11
+Content-Disposition: form-data; name="z"
+
+poop
+-----------------------------040B071A2F11
+Content-Disposition: form-data; name="f"; filename="on-puush.txt"
+Content-Type: application/octet-stream
