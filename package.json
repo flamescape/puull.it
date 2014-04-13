@@ -21,6 +21,8 @@
     "request": "~2.34.0",
     "express": "~3.5.1",
     "bases": "~0.2.0",
-    "browserify": "~3.39.0"
+    "browserify": "~3.39.0",
+    "underscore": "~1.6.0",
+    "async": "~0.7.0"
   }
 }

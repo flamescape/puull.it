@@ -1,17 +1,17 @@
 
-angular.module('app', [])
+angular.module('app', ['restangular'])
 
-    .controller('ListCtrl', function($scope){
-    
-        var rint = (Math.random() * 10000) << 0;
+    .controller('ListCtrl', function($scope, Restangular){
+        $scope.load = function(){
+            Restangular.one('puush').get().then(function(puush){
+                $scope.puushes = [];
+                for (var i = 500; i < 550; i++) {
+                    $scope.puushes.push({img: Bases.toBase62(puush.end - i)});
+                }
+            });
+        };
         
-        var ps = [];
-        for (var i = 0; i < 50; i++) {
-            ps.push({img: Bases.toBase62(i+118420000 + rint)});
-        }
-    
-        $scope.puushes = ps;
-    
+        $scope.load();
     })
     
 ;
