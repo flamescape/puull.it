@@ -83,23 +83,24 @@ module.exports = function(apiKey){
             }, function(err, res, body){
                 if (err) return cb(err);
                 
-                var filename = '';
-                try {
-                    filename = res.headers['content-disposition'].match(/^inline; filename="(.*)"$/)[1];
-                } catch (x){}
-                
                 var md5 = crypto.createHash('md5').update(body).digest('hex');
                 
-                return cb(null, {
+                var p = {
                     pid: pid,
-                    filename: filename,
                     headers: res.headers,
                     body: body,
                     size: body.length,
                     md5: md5,
                     isDeleted: md5 === 'e737e67bca45ac3a2f1f080d104aec82',
                     isPrivate: md5 === 'ca9e65020a53f23371bc47906e900ab4'
-                });
+                };
+                
+                try {
+                    p.filename = res.headers['content-disposition'].match(/^inline; filename="(.*)"$/)[1];
+                    p.type = res.headers['content-type'];
+                } catch (x){}
+                
+                return cb(null, p);
             });
         }, 2);
         

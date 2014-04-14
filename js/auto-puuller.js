@@ -10,7 +10,7 @@ module.exports = function(db, puush){
         }
         p.tags = [];
         db.insert(_.omit(p, 'body'));
-        console.log('written', p.md5);
+        console.log('written', p.md5, p.pid);
         return p;
     };
     /*
@@ -18,6 +18,7 @@ module.exports = function(db, puush){
         for (var i = 0; i < 50; i++) {
             puush.fetch(pid - (i+500)).then(record);
         }
-    });*/
+    });
+    */
 
 };

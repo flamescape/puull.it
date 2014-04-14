@@ -9,9 +9,11 @@ var express = require('express')
 db.ensureIndex({fieldName: 'pid', unique: true});
 require('./js/auto-puuller')(db, require('./js/puush')('AAF303829FFC9689A770B5B44EDF7487'));
 
-app.get('/puushes', function(req, res, next){
-    console.log(req.query);
-    next();
+app.get('/puush/:pid', function(req, res, next){
+    db.find({pid:parseInt(req.params.pid)}, function(err, lines){
+        if (err || !lines.length) res.send(404);
+        res.json(lines[0]);
+    });
 });
 
 app.get('/dl/:id', function(req, res, next){
