@@ -3,6 +3,7 @@ var Promise = require('bluebird')
   , bases = require('bases')
   , crypto = require('crypto')
   , stream = require('stream')
+  , async = require('async')
   , fs = Promise.promisifyAll(require('fs'))
   ;
 
@@ -72,8 +73,41 @@ module.exports = function(apiKey){
             return pid;
         });
     };
+    
+    var fetch = (function(){
+        var q = async.queue(function(pid, cb){
+            request({
+                url:'http://puu.sh/'+bases.toBase62(pid),
+                encoding: null,
+                method: 'get'
+            }, function(err, res, body){
+                if (err) return cb(err);
+                
+                var filename = '';
+                try {
+                    filename = res.headers['content-disposition'].match(/^inline; filename="(.*)"$/)[1];
+                } catch (x){}
+                
+                var md5 = crypto.createHash('md5').update(body).digest('hex');
+                
+                return cb(null, {
+                    pid: pid,
+                    filename: filename,
+                    headers: res.headers,
+                    body: body,
+                    size: body.length,
+                    md5: md5,
+                    isDeleted: md5 === 'e737e67bca45ac3a2f1f080d104aec82',
+                    isPrivate: md5 === 'ca9e65020a53f23371bc47906e900ab4'
+                });
+            });
+        }, 2);
+        
+        return Promise.promisify(q.push.bind(q));
+    })();
 
     return {
+        fetch: fetch,
         del: del,
         up: up,
         upFile: upFile,

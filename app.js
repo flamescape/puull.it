@@ -8,7 +8,12 @@ var express = require('express')
 
 db.ensureIndex({fieldName: 'pid', unique: true});
 require('./js/auto-puuller')(db, require('./js/puush')('AAF303829FFC9689A770B5B44EDF7487'));
-  
+
+app.get('/puushes', function(req, res, next){
+    console.log(req.query);
+    next();
+});
+
 app.get('/dl/:id', function(req, res, next){
     console.log('req', req.ip, req.params.id);
     request.get('http://puu.sh/'+req.params.id).pipe(res);
