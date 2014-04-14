@@ -92,7 +92,8 @@ module.exports = function(apiKey){
                     size: body.length,
                     md5: md5,
                     isDeleted: md5 === 'e737e67bca45ac3a2f1f080d104aec82',
-                    isPrivate: md5 === 'ca9e65020a53f23371bc47906e900ab4'
+                    isPrivate: md5 === 'ca9e65020a53f23371bc47906e900ab4',
+                    found: new Date()
                 };
                 
                 try {

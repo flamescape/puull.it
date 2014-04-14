@@ -2,6 +2,7 @@ var express = require('express')
   , app = express()
   , bases = require('bases')
   , request = require('request')
+  , fs = require('fs')
   , Datastore = require('nedb')
   , db = new Datastore({filename: './db/puushes', autoload: true});
   ;
@@ -9,23 +10,28 @@ var express = require('express')
 db.ensureIndex({fieldName: 'pid', unique: true});
 require('./js/auto-puuller')(db, require('./js/puush')('AAF303829FFC9689A770B5B44EDF7487'));
 
-app.get('/puush/:pid', function(req, res, next){
+app.get('/puushes/:pid', function(req, res, next){
     db.find({pid:parseInt(req.params.pid)}, function(err, lines){
         if (err || !lines.length) res.send(404);
         res.json(lines[0]);
     });
 });
 
-app.get('/dl/:id', function(req, res, next){
-    console.log('req', req.ip, req.params.id);
-    request.get('http://puu.sh/'+req.params.id).pipe(res);
+app.get('/puushes/:pid/dl', function(req, res, next){
+    db.find({pid:parseInt(req.params.pid)}, function(err, lines){
+        if (err || !lines.length) return res.send(404);
+        var path = './db/store/'+lines[0].md5;
+        if (!fs.existsSync(path)) return res.send(400);
+        //res.set('content-type', lines[0].type);
+        fs.createReadStream(path).pipe(res);
+    });
 });
 
-app.get('/puush', function(req, res, next){
-    puush.getEnd().then(function(end){
-        res.json({
-            end: end
-        });
+app.get('/puushes', function(req, res, next){
+    // 50 most recent
+    db.find({}).sort({found: -1}).limit(50).exec(function(err, lines){
+        if (err) res.send(500);
+        res.json(lines);
     });
 });
 

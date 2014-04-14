@@ -29,7 +29,7 @@
 
     <div ng-controller="ListCtrl" class="puushes">
         <diagram ng-repeat="p in puushes">
-            <a href="http://puu.sh/{{p.img}}"><img ng-src="/dl/{{p.img}}" alt=""></a>
+            <a href="http://puu.sh/{{p.img}}"><img ng-src="/puushes/{{p.pid}}/dl" alt=""></a>
         </diagram>
     </div>
 

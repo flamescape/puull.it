@@ -13,12 +13,12 @@ module.exports = function(db, puush){
         console.log('written', p.md5, p.pid);
         return p;
     };
-    /*
+    
     puush.getEnd().then(function(pid){
         for (var i = 0; i < 50; i++) {
             puush.fetch(pid - (i+500)).then(record);
         }
     });
-    */
+    
 
 };
