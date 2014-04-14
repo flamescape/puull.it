@@ -11,18 +11,17 @@ db.ensureIndex({fieldName: 'pid', unique: true});
 require('./js/auto-puuller')(db, require('./js/puush')('AAF303829FFC9689A770B5B44EDF7487'));
 
 app.get('/puushes/:pid', function(req, res, next){
-    db.find({pid:parseInt(req.params.pid)}, function(err, lines){
-        if (err || !lines.length) res.send(404);
-        res.json(lines[0]);
+    db.findOne({pid:parseInt(req.params.pid)}, function(err, p){
+        if (err || !p) res.send(404);
+        res.json(p);
     });
 });
 
 app.get('/puushes/:pid/dl', function(req, res, next){
-    db.find({pid:parseInt(req.params.pid)}, function(err, lines){
-        if (err || !lines.length) return res.send(404);
-        var path = './db/store/'+lines[0].md5;
+    db.findOne({pid:parseInt(req.params.pid)}, function(err, p){
+        if (err || !p) return res.send(404);
+        var path = './db/store/'+p.md5;
         if (!fs.existsSync(path)) return res.send(400);
-        //res.set('content-type', lines[0].type);
         fs.createReadStream(path).pipe(res);
     });
 });

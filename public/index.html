@@ -28,8 +28,8 @@
 <body>
 
     <div ng-controller="ListCtrl" class="puushes">
-        <diagram ng-repeat="p in puushes">
-            <a href="http://puu.sh/{{p.img}}"><img ng-src="/puushes/{{p.pid}}/dl" alt=""></a>
+        <diagram ng-repeat="p in puushes" ng-if="!p.isDeleted && !p.isPrivate">
+            <a href="{{p.link}}"><img ng-src="/puushes/{{p.pid}}/dl" alt="{{p.filename}}" title="{{a.filename}}"></a>
         </diagram>
     </div>
 
