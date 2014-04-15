@@ -19,8 +19,8 @@ module.exports = function(db, puush){
         puush.fetch(pid)
             .then(record)
             .then(function(){ console.log('Fetched PID:', pid); cb(); })
-            .catch(function(err){ console.log('Caught err:', err); cb(); });
-    }, 5);
+            .catch(function(err){ console.log('Caught err:', err); setTimeout(cb, 10000); });
+    }, 2);
     
     var lastRecordedPid = function(){
         return new Promise(function(resolve, reject){

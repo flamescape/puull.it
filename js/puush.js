@@ -83,6 +83,7 @@ module.exports = function(apiKey){
                 timeout: 5000
             }, function(err, res, body){
                 if (err) return cb(err);
+                if (res.statusCode !== 200) return cb(Error("Status: "+res.statusCode));
                 
                 var md5 = crypto.createHash('md5').update(body).digest('hex');
                 
@@ -104,7 +105,7 @@ module.exports = function(apiKey){
                 
                 return cb(null, p);
             });
-        }, 4);
+        }, 2);
         
         return Promise.promisify(q.push.bind(q));
     })();
