@@ -79,7 +79,8 @@ module.exports = function(apiKey){
             request({
                 url:'http://puu.sh/'+bases.toBase62(pid),
                 encoding: null,
-                method: 'get'
+                method: 'get',
+                timeout: 5000
             }, function(err, res, body){
                 if (err) return cb(err);
                 
@@ -103,7 +104,7 @@ module.exports = function(apiKey){
                 
                 return cb(null, p);
             });
-        }, 2);
+        }, 4);
         
         return Promise.promisify(q.push.bind(q));
     })();
